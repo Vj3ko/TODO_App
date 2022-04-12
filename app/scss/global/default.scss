@@ -1,0 +1,78 @@
+@use "../utilities/" as *;
+@use "./typography.scss" as *;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $josefin;
+}
+
+a {
+  text-decoration: none;
+
+  &:focus {
+    outline: 2px double var(--color-text-completed);
+    outline-offset: 2px;
+  }
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background-color);
+  position: relative;
+  font-size: rem(18);
+  transition: 1s;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: rem(200);
+    z-index: -1;
+    transition: 1s;
+  }
+
+  &.dark-theme::before {
+    background: url(../../../images/bg-mobile-dark.jpg) center/cover no-repeat;
+  }
+
+  &.light-theme::before {
+    background: url(../../../images/bg-mobile-light.jpg) center/cover no-repeat;
+  }
+
+  @include breakpoint("medium") {
+    &.dark-theme::before {
+      background: url(../../../images/bg-desktop-dark.jpg) center/cover
+        no-repeat;
+    }
+
+    &.light-theme::before {
+      background: url(../../../images/bg-desktop-light.jpg) center/cover
+        no-repeat;
+    }
+  }
+  //display moon/sun icon depending on theme selected
+  &.dark-theme header .header-bg-toggler .sun-img {
+    opacity: 1;
+    pointer-events: initial;
+  }
+  &.light-theme header .header-bg-toggler .moon-img {
+    opacity: 1;
+    pointer-events: initial;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="./dist/style.css" />
+
+    <title>Todo APP</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1><a class="header__title" href="index.html">Todo</a></h1>
+      <button class="header-bg-toggler" data-theme-toggler>
+        <img src="./images/icon-sun.svg" alt="sun" class="sun-img" />
+        <img src="./images/icon-moon.svg" alt="moon" class="moon-img" />
+      </button>
+    </header>
+
+    <main class="main">
+      <form class="form" data-form>
+        <label
+          ><input
+            type="text"
+            placeholder="Create a new todo..."
+            class="todo-input"
+            aria-label="Enter a new todo item"
+            autofocus
+            data-input
+        /></label>
+      </form>
+
+      <div class="todo-container">
+        <ul class="todo-list" data-list></ul>
+        <!-- populated by js -->
+
+        <div class="counter-clear">
+          <span class="todo-counter" data-counter></span>
+          <div class="filter-btns sm-hidden">
+            <button data-tabs value="all" class="active">All</button>
+            <button data-tabs value="active">Active</button>
+            <button data-tabs value="completed">Completed</button>
+          </div>
+          <button class="clear-completed" data-clear>Clear completed</button>
+        </div>
+      </div>
+
+      <section class="todo-filter md-hidden">
+        <div class="filter-btns">
+          <button data-tabs value="all" class="active">All</button>
+          <button data-tabs value="active">Active</button>
+          <button data-tabs value="completed">Completed</button>
+        </div>
+      </section>
+    </main>
+
+    <span class="info">Drag and drop to reorder list</span>
+
+    <!--===== SORTABLE JS =====-->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+    <script src="./dist/script.js"></script>
+  </body>
+</html>

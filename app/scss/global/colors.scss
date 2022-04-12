@@ -1,0 +1,26 @@
+// primary
+:root {
+  --active-color: hsl(220, 98%, 61%);
+  --linear-gradient: 135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%);
+}
+
+.dark-theme {
+  //depending on theme
+  --background-color: hsl(235, 21%, 11%);
+  --todo-bg: hsl(235, 24%, 19%);
+  --checkbox-color: hsl(237, 14%, 26%);
+  --text-color-active: hsl(234, 39%, 85%);
+  --color-text-completed: hsl(233, 14%, 35%);
+
+  --button-hover: hsl(236, 33%, 92%);
+  --color-text-1: hsl(234, 11%, 52%);
+}
+.light-theme {
+  //depending on theme
+  --background-color: hsl(0, 0%, 98%);
+  --todo-bg: hsl(0, 0%, 100%);
+  --checkbox-color: hsl(236, 33%, 92%);
+  --text-color-active: hsl(235, 19%, 35%);
+  --color-text-completed: hsl(233, 11%, 84%);
+  --color-text-1: hsl(236, 9%, 61%);
+}
