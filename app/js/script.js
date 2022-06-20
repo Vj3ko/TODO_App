@@ -19,6 +19,7 @@ function themeToggler() {
     : (body.className = "light-theme") &&
       localStorage.setItem("theme", JSON.stringify("light-theme"));
 }
+//
 
 //selectors
 const form = document.querySelector("[data-form]");
@@ -27,6 +28,34 @@ const todoList = document.querySelector("[data-list]");
 const counterElement = document.querySelector("[data-counter]");
 const tabs = document.querySelectorAll("[data-tabs]");
 const clearBtn = document.querySelector("[data-clear]");
+const zeroTodos = document.querySelector(".todo-none");
+//
+
+//animations
+let animations = {
+  fadeIn: [
+    { opacity: 0, transform: "scaleY(0)", height: 0 },
+    { opacity: 1, transform: "scaleY(1)" },
+  ],
+  fadeOut: [
+    {
+      transform: "scaleY(1)",
+      transformOrigin: "100% 0%",
+      opacity: 1,
+    },
+    {
+      transform: "scaleY(0)",
+      transformOrigin: "100% 0%",
+      opacity: 1,
+      height: 0,
+    },
+  ],
+};
+
+const options = {
+  duration: 700,
+  fill: "forwards",
+};
 //
 
 let todoItems = JSON.parse(localStorage.getItem("todos")) || [];
@@ -44,12 +73,14 @@ function addTodo() {
 
   todoItems.push(todo);
   localStorage.setItem("todos", JSON.stringify(todoItems));
-
   input.value = "";
   input.focus();
   showActiveTab(tabs[0]);
   updateTodos();
+
+  todoList.lastChild.animate(animations.fadeIn, options);
 }
+//
 
 //searches for local storage if it exits and updates the list
 function updateTodos() {
@@ -57,17 +88,23 @@ function updateTodos() {
   removeAllTodos(todoList);
   countActiveTodos();
 
+  todoItems.length < 1
+    ? (zeroTodos.style.display = "block")
+    : (zeroTodos.style.display = "none");
+
   todoItems.forEach((todo, index) => {
     renderTodo(todo, index);
   });
 }
+//
 
-// when addind new todo to the list, removes all todos to make sure we dont get double values
+// when adding new todo to the list, removes all todos to make sure we dont get double values
 function removeAllTodos(todos) {
   while (todos.firstChild) {
     todos.removeChild(todos.firstChild);
   }
 }
+//
 
 //render todo component
 function renderTodo(todo, index) {
@@ -113,6 +150,7 @@ function renderTodo(todo, index) {
   checkboxElement.addEventListener("click", () => checkHandler(listItem));
   deleteButton.addEventListener("click", (e) => deleteHandler(e));
 }
+//
 
 // checks a selected todo item to complete
 function checkHandler(listItem) {
@@ -127,15 +165,23 @@ function checkHandler(listItem) {
   countActiveTodos();
   localStorage.setItem("todos", JSON.stringify(todoItems));
 }
+//
 
 //deletes selected todo item
 function deleteHandler(e) {
   let index = e.target.dataset.index;
+  let parentElement = e.target.parentElement;
 
   todoItems.splice(index, 1);
   localStorage.setItem("todos", JSON.stringify(todoItems));
-  updateTodos();
+
+  parentElement.animate(animations.fadeOut, options);
+  setTimeout(() => {
+    updateTodos();
+  }, 700);
+  showActiveTab(tabs[0]);
 }
+//
 
 // clear only completed todos
 function clearCompletedTodos() {
@@ -144,10 +190,12 @@ function clearCompletedTodos() {
     if (!todo.checked) filtered.push(todo);
     return filtered;
   });
-
+  
   localStorage.setItem("todos", JSON.stringify(filtered));
+  showActiveTab(tabs[0]);
   updateTodos();
 }
+//
 
 //count how many todos are left uncompleted
 function countActiveTodos() {
@@ -157,12 +205,14 @@ function countActiveTodos() {
     ? (counterElement.innerHTML = `${counter} item left`)
     : (counterElement.innerHTML = `${counter} items left`);
 }
+//
 
 // adds bluish color style to filtering button
 function showActiveTab(filter) {
   tabs.forEach((tab) => tab.classList.remove("active"));
   filter ? filter.classList.add("active") : null;
 }
+//
 
 // filter todo list depending on filter button pressed
 tabs.forEach((tab) => {
@@ -191,6 +241,7 @@ tabs.forEach((tab) => {
     }
   });
 });
+//
 
 updateTodos();
 
@@ -199,15 +250,14 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   addTodo();
 });
+//
 
 clearBtn.addEventListener("click", clearCompletedTodos);
 
 //sorting todo items with dragndrop
 new Sortable(todoList, {
-  swap: true,
-  ghostClass: "selected",
-  swapClass: "highlight",
   animation: 500,
+  ghostClass: "selected",
   // save sorted list to local storage
   onSort: () => {
     let listChildren = todoList.childNodes;
@@ -231,7 +281,8 @@ new Sortable(todoList, {
         }
       });
     });
-
     localStorage.setItem("todos", JSON.stringify(storageSorted));
+    updateTodos();
   },
 });
+//

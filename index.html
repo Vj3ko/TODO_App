@@ -39,11 +39,12 @@
 
       <div class="todo-container">
         <ul class="todo-list" data-list></ul>
+        <span class="todo-none">You have no active todos!</span>
         <!-- populated by js -->
 
         <div class="counter-clear">
           <span class="todo-counter" data-counter></span>
-          <div class="filter-btns sm-hidden">
+          <div class="filter-btns">
             <button data-tabs value="all" class="active">All</button>
             <button data-tabs value="active">Active</button>
             <button data-tabs value="completed">Completed</button>
@@ -51,14 +52,6 @@
           <button class="clear-completed" data-clear>Clear completed</button>
         </div>
       </div>
-
-      <section class="todo-filter md-hidden">
-        <div class="filter-btns">
-          <button data-tabs value="all" class="active">All</button>
-          <button data-tabs value="active">Active</button>
-          <button data-tabs value="completed">Completed</button>
-        </div>
-      </section>
     </main>
 
     <span class="info">Drag and drop to reorder list</span>
