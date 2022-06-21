@@ -82,7 +82,7 @@ function addTodo() {
 }
 //
 
-//searches for local storage if it exits and updates the list
+//searches for local storage if it exists and updates the list
 function updateTodos() {
   todoItems = JSON.parse(localStorage.getItem("todos")) || [];
   removeAllTodos(todoList);
@@ -147,13 +147,13 @@ function renderTodo(todo, index) {
   fragment.appendChild(listItem);
   todoList.appendChild(fragment);
 
-  checkboxElement.addEventListener("click", () => checkHandler(listItem));
-  deleteButton.addEventListener("click", (e) => deleteHandler(e));
+  checkboxElement.addEventListener("click", () => checkTodo(listItem));
+  deleteButton.addEventListener("click", (e) => deleteTodo(e));
 }
 //
 
 // checks a selected todo item to complete
-function checkHandler(listItem) {
+function checkTodo(listItem) {
   let checkbox = listItem.querySelector("input[type=checkbox]");
   let index = checkbox.dataset.index;
 
@@ -168,7 +168,7 @@ function checkHandler(listItem) {
 //
 
 //deletes selected todo item
-function deleteHandler(e) {
+function deleteTodo(e) {
   let index = e.target.dataset.index;
   let parentElement = e.target.parentElement;
 

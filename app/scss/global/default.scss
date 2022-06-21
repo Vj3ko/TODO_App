@@ -24,7 +24,7 @@ body {
   background: var(--background-color);
   position: relative;
   font-size: rem(18);
-  transition: 1s;
+  transition: background 600ms ease-in-out;
 
   &::before {
     content: "";
@@ -34,7 +34,7 @@ body {
     right: 0;
     height: rem(230);
     z-index: -1;
-    transition: 1s;
+    transition: all 600ms ease-in-out;
   }
 
   &.dark-theme::before {
