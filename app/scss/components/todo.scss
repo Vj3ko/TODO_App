@@ -155,7 +155,7 @@
           font-size: rem(14);
           position: relative;
           overflow: hidden;
-          transition: 500ms ease-in-out;
+          transition: 600ms ease-in-out;
           word-break: break-word;
           letter-spacing: rem(1);
 
@@ -183,7 +183,7 @@
           border: rem(1) solid var(--checkbox-color);
           border-radius: 50%;
           transform: translateY(-50%);
-          transition: border 500ms;
+          transition: all 600ms;
 
           &:hover {
             background: linear-gradient(var(--linear-gradient));
@@ -200,7 +200,7 @@
             border: double rem(1) transparent;
             border-radius: 50%;
             opacity: 1;
-            transition: 500ms ease-in-out;
+            transition: 600ms ease-in-out;
           }
           // checkmark sign
           &::after {
@@ -210,7 +210,7 @@
             left: 50%;
             transform: translateX(-50%) translateY(-50%);
             opacity: 0;
-            transition: 500ms ease-in-out;
+            transition: 600ms ease-in-out;
           }
         }
       }
@@ -220,7 +220,7 @@
         height: rem(20);
         background: transparent;
         opacity: 0;
-        transition: 350ms;
+        transition: 600ms;
 
         &:focus {
           opacity: 1;
@@ -254,7 +254,7 @@
 .clear-completed {
   background: transparent;
   color: var(--color-text-1);
-  transition: 250ms ease-in-out;
+  transition: 600ms ease-in-out;
 
   &:hover {
     color: var(--text-color-active);
@@ -295,7 +295,7 @@
     font-size: rem(16);
     font-weight: bold;
     color: var(--color-text-1);
-    transition: 250ms ease-in-out;
+    transition: 250 ease-in-out;
 
     &.active {
       color: var(--active-color);
