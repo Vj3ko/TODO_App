@@ -220,7 +220,7 @@
         height: rem(20);
         background: transparent;
         opacity: 0;
-        transition: 600ms;
+        transition: background 600ms;
 
         &:focus {
           opacity: 1;
@@ -254,7 +254,7 @@
 .clear-completed {
   background: transparent;
   color: var(--color-text-1);
-  transition: 600ms ease-in-out;
+  transition: 250ms ease-in-out;
 
   &:hover {
     color: var(--text-color-active);
